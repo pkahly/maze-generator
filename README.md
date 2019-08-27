@@ -22,3 +22,6 @@ java main.Main
 
 ![Maze 1](/images/maze1.png)
 ![Maze 2](/images/maze2.png)
+
+#### The "erase visited/popped cells" options are just for visual effect
+![Maze 3](/images/maze3.png)
