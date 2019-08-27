@@ -17,8 +17,8 @@ java main.Main
 
 #### Solvers use colors to remember a cell's status
 * white = unvisited
-* light blue = visited, not popped yet
-* dark blue = popped
+* light blue = visited - may be used for backtracking
+* dark blue = popped - will not be used again
 
 ![Maze 1](/images/maze1.png)
 ![Maze 2](/images/maze2.png)
