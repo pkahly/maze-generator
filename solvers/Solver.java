@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//TODO wall-walker subclass
-//TODO (others)
 public abstract class Solver {
 	// Colors
 	public static final int WALL = 0;
@@ -71,7 +69,6 @@ public abstract class Solver {
 	
 	public boolean isFinished() {
 		if (row == finishRow && column == finishColumn) {
-			System.out.println("Moves: " + moves);
 			return true;
 		}
 		return false;
@@ -105,7 +102,6 @@ public abstract class Solver {
 		}
 	}
 	
-
 	protected void moveTo(int newRow, int newColumn) {
 		moveTo(newRow, newColumn, VISITED);
 	}

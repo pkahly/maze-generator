@@ -6,11 +6,9 @@ import java.util.Stack;
 import data.MazeCell;
 
 /**
- * Generates a perfect maze using Randomized Kruskal's algorithm.
+ * Generates a maze using Randomized Kruskal's algorithm.
  */
 public class RandomizedKruskals extends Generator {
-	public RandomizedKruskals() {
-	}
 	
 	@Override
 	public String toString() {

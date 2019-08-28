@@ -1,6 +1,7 @@
 package generators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -45,6 +46,19 @@ public abstract class Generator {
 		}
 		return maze;
 	}
+	
+	/**
+	 * Retrieve a list of all cells in the maze
+	 */
+   public List<MazeCell> getAllCells(MazeCell[][] maze) {
+      List<MazeCell> cells = new ArrayList<MazeCell>();
+      
+      for (MazeCell[] array : maze) {
+        cells.addAll(Arrays.asList(array));
+      }
+      
+      return cells;
+   }
 	
 	/**
 	 * Connect the two cells together.

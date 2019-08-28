@@ -6,11 +6,9 @@ import java.util.Stack;
 import data.MazeCell;
 
 /**
- * Generates a perfect maze using a recursive backtracker
+ * Generates a maze using a recursive backtracker
  */
 public class RecursiveBacktracker extends Generator {
-	public RecursiveBacktracker() {
-	}
 	
 	@Override
 	public String toString() {

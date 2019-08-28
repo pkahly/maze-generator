@@ -42,8 +42,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		// Generator Algorithm
 		genAlgorithm = new JComboBox<Generator>();
-		genAlgorithm.addItem(new RecursiveBacktracker());
+		genAlgorithm.addItem(new Wilsons());
 		//genAlgorithm.addItem(new RandomizedKruskals()); // TODO(#6) Implement more maze generation algorithms
+		genAlgorithm.addItem(new RecursiveBacktracker());
 		addControl("Maze Generation Algorithm:", genAlgorithm);
 		
 		// Loop Settings
