@@ -1,14 +1,13 @@
 package gui;
 
-import solvers.*;
-import generators.Generator;
-import generators.SimplyConnectedGenerator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-import solvers.Solver;
+
+import solvers.*;
+import generators.*;
 import util.Bitmap;
 import util.DisplayUtil;
 import data.MazeCell;
@@ -42,7 +41,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		// Generator Algorithm
 		genAlgorithm = new JComboBox<Generator>();
-		genAlgorithm.addItem(new SimplyConnectedGenerator());
+		genAlgorithm.addItem(new RecursiveBacktracker());
+		//genAlgorithm.addItem(new RandomizedKruskals()); // TODO(#6) Implement more maze generation algorithms
 		addControl("Maze Generation Algorithm:", genAlgorithm);
 		
 		// Solver Algorithm

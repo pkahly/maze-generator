@@ -6,16 +6,15 @@ import java.util.Stack;
 import data.MazeCell;
 
 /**
- * Generates a "Perfect" or "Simply-Connected" maze.
- * This means that there is exactly one path between each pair of cells. 
+ * Generates a perfect maze using a recursive backtracker
  */
-public class SimplyConnectedGenerator extends Generator {
-	public SimplyConnectedGenerator() {
+public class RecursiveBacktracker extends Generator {
+	public RecursiveBacktracker() {
 	}
 	
 	@Override
 	public String toString() {
-		return "Depth First Search";
+		return "Recursive Backtracker";
 	}
 	
 	@Override
@@ -23,7 +22,6 @@ public class SimplyConnectedGenerator extends Generator {
 		// Setup
 		MazeCell[][] maze = createBlankMaze(height, width);
 		Stack<MazeCell> stack = new Stack<MazeCell>();
-		MazeCell newCell;
 		
 		// Initial Cell
 		MazeCell currentCell = randomCell(maze);
@@ -39,7 +37,7 @@ public class SimplyConnectedGenerator extends Generator {
 				currentCell = stack.pop();
 			} else {
 				// Visit another cell
-				newCell = randomCell(unvisitedNeighbors);
+				MazeCell newCell = randomCell(unvisitedNeighbors);
 				breakWall(currentCell, newCell);
 				newCell.isVisited = true;
 				stack.push(newCell);
