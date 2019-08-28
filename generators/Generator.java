@@ -8,6 +8,8 @@ import java.util.Random;
 import data.MazeCell;
 
 public abstract class Generator {
+   public static final int LOOP_MULTIPLIER = 3;
+   
 	Random random;
 	
 	public Generator() {
@@ -89,11 +91,33 @@ public abstract class Generator {
 	}
 	
 	/**
+	 * Add loops to the maze by removing a few random walls
+	 */
+	public void addLoops(MazeCell[][] maze) {
+	   // Number of Loops is proportional to maze height
+	   int numLoops = maze.length * LOOP_MULTIPLIER;
+	   
+	   for (int i = 0; i < numLoops; i++) {
+	      // Pick a random cell
+	      MazeCell cell = randomCell(maze);
+	      
+	      // Get a list of it's neighbors
+	      List<MazeCell> neighbors = getNeighbors(maze, cell);
+	      
+	      // Pick a random neighbor
+	      MazeCell neighbor = randomCell(neighbors);
+	      
+	      // Connect the cells
+	      breakWall(cell, neighbor);
+	   }
+	}
+	
+	/**
 	 * Select a random cell from the list.
 	 */
-	protected MazeCell randomCell(List<MazeCell> unvisitedNeighbors) {
-		int index = Math.abs(random.nextInt()) % unvisitedNeighbors.size();
-		return unvisitedNeighbors.get(index);
+	protected MazeCell randomCell(List<MazeCell> cells) {
+		int index = Math.abs(random.nextInt()) % cells.size();
+		return cells.get(index);
 	}
 	
 	/**
@@ -101,6 +125,26 @@ public abstract class Generator {
 	 * Returns a list containing between 0 and 4 cells. 
 	 */
 	protected List<MazeCell> getUnvisitedNeighbors(MazeCell[][] maze, MazeCell currentCell) {
+	   // Get neighboring cells
+		List<MazeCell> cells = getNeighbors(maze, currentCell);
+		
+		// Remove cells that have been visited
+		Iterator<MazeCell> iter = cells.iterator();
+		while (iter.hasNext()) {
+			MazeCell cell = iter.next();
+			if (cell.isVisited) {
+				iter.remove();
+			}
+		}
+		
+		return cells;
+	}
+	
+	/**
+	 * Get all cells bordering the current cell.
+	 * Returns a list containing between 2 and 4 cells. 
+	 */
+	protected List<MazeCell> getNeighbors(MazeCell[][] maze, MazeCell currentCell) {
 		List<MazeCell> cells = new ArrayList<MazeCell>();
 		int row = currentCell.row;
 		int column = currentCell.column;
@@ -109,14 +153,6 @@ public abstract class Generator {
 		addCellIfValid(maze, cells, row+1, column); // South
 		addCellIfValid(maze, cells, row, column-1); // West
 		addCellIfValid(maze, cells, row, column+1); // East
-		
-		Iterator<MazeCell> iter = cells.iterator();
-		while (iter.hasNext()) {
-			MazeCell cell = iter.next();
-			if (cell.isVisited) {
-				iter.remove();
-			}
-		}
 		
 		return cells;
 	}

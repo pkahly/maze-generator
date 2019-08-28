@@ -14,11 +14,13 @@ public class MazeCell {
 	public int row;
 	public int column;
 	
-	/**
-	 * 
-	 */
 	public MazeCell(int row, int column) {
 		this.row = row;
 		this.column = column;
+	}
+	
+	@Override
+	public String toString() {
+	   return row + "," + column;
 	}
 }

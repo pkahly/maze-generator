@@ -17,6 +17,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel optionPanel;
 	private JPanel buttonPanel;
 	private JComboBox<Generator> genAlgorithm;
+	private JCheckBox loopBox;
 	private JComboBox<Solver> solverAlgorithm;
 	private JTextField widthBox;
 	private JTextField heightBox;
@@ -44,6 +45,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		genAlgorithm.addItem(new RecursiveBacktracker());
 		//genAlgorithm.addItem(new RandomizedKruskals()); // TODO(#6) Implement more maze generation algorithms
 		addControl("Maze Generation Algorithm:", genAlgorithm);
+		
+		// Loop Settings
+		loopBox = new JCheckBox();
+		addControl("Add Loops", loopBox);
 		
 		// Solver Algorithm
 		solverAlgorithm = new JComboBox<Solver>();
@@ -102,10 +107,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Generate maze
 		int height = 10;
 		int width = 20;
 		int timerDelay = 100;
+		
 		try {
 			height = Integer.parseInt(heightBox.getText());
 			width = Integer.parseInt(widthBox.getText());
@@ -122,8 +127,16 @@ public class MainFrame extends JFrame implements ActionListener {
 		} else if (timerDelay < 1) {
 			JOptionPane.showMessageDialog(this, "Timer delay must be positive");
 		} else {
+		   // Generate Maze
 			Generator generator = (Generator)genAlgorithm.getSelectedItem();
 			MazeCell[][] maze = generator.generateMaze(height, width);
+			
+			// Add loops
+			if (loopBox.isSelected()) {
+			   generator.addLoops(maze);
+			}
+			
+			// Create maze image
 			BufferedImage image = DisplayUtil.imageFromMaze(maze, 0);
 			
 			// Create solver
