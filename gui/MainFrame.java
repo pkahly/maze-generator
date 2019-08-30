@@ -53,11 +53,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		// Solver Algorithm
 		solverAlgorithm = new JComboBox<Solver>();
-		solverAlgorithm.addItem(new RandomMouseSolver());
-		solverAlgorithm.addItem(new SmartMouseSolver());
-		//solverAlgorithm.addItem(new WallFollowerSolver()); // TODO(#2) Implement Wall-Follower
 		solverAlgorithm.addItem(new DepthFirstSolver());
 		solverAlgorithm.addItem(new BreadthFirstSolver());
+		solverAlgorithm.addItem(new SmartMouseSolver());
+		solverAlgorithm.addItem(new RandomMouseSolver());
+		//solverAlgorithm.addItem(new WallFollowerSolver()); // TODO(#2) Implement Wall-Follower
 		addControl("Maze Solving Algorithm:", solverAlgorithm);
 		
 		// Solver delay
